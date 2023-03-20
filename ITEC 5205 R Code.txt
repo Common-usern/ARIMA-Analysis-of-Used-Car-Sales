@@ -1,0 +1,505 @@
+
+R version 4.1.3 (2022-03-10) -- "One Push-Up"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: i386-w64-mingw32/i386 (32-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+
+> 
+
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2005,1),frequency = 12)
+> data = ts(data[,2],start = c(2005,1),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> tsData = ts(RawData, start = c(2020,1), frequency = 12)
+Error in is.data.frame(data) : object 'RawData' not found
+> tsData = ts(listeddate, start = c(2020,1), frequency = 12)
+Error in is.data.frame(data) : object 'listeddate' not found
+> tsData = ts(listed_date, start = c(2020,1), frequency = 12)
+Error in is.data.frame(data) : object 'listed_date' not found
+> tsData = ts(data, start = c(2020,1), frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> 
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> 
+> 
+> 
+> 
+> 
+> 
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data[,2],start = c(2020,1),frequency = 1)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(data[,2],start = c(2020,1),frequency = 10)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(data[,2],start = c(2019,1),frequency = 1)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(data[,2],start = c(2020,1),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(listed_date,start = c(2020,1),frequency = 12)
+Error in is.data.frame(data) : object 'listed_date' not found
+> data = ts(data[,2],start = c(2020,1),frequency = 10)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> 
+> 
+> > data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+Error: unexpected '>' in ">"
+> > data = ts(data[,2],start = c(2020,1),frequency = 12)
+Error: unexpected '>' in ">"
+> > plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error: unexpected '>' in ">"
+> > data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+Error: unexpected '>' in ">"
+> > data = ts(data[,2],start = c(2020,1),frequency = 12)
+Error: unexpected '>' in ">"
+> > plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error: unexpected '>' in ">"
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> plot(diff(data),ylab='Number of days unsold')
+> components.ts = decompose(tsData)
+> plot(components.ts)
+> components.ts = decompose(data)
+> plot(components.ts)
+> 
+> 
+> 
+> #Load Libraries
+> library("fUnitRoots")
+Error in library("fUnitRoots") : there is no package called ‘fUnitRoots’
+> library(lmtest)
+Loading required package: zoo
+
+Attaching package: ‘zoo’
+
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+
+> library("forecast")
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+> library(FitAR)
+Error in library(FitAR) : there is no package called ‘FitAR’
+> #import data
+> data<-read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv',header=TRUE)
+> #convert to time series
+> tsData<- ts(data[2:35,2],start=c(2020,1),frequency=12)
+> plot(tsData)
+> #decompose into time series components
+> timeseriescomponents <- decompose(tsData)
+> plot(timeseriescomponents)
+> #detemine stationarity of data
+> urkpssTest(tsData, type = c("tau"), lags = c("short"),use.lag = NULL, doplot = TRUE)
+Error in urkpssTest(tsData, type = c("tau"), lags = c("short"), use.lag = NULL,  : 
+  could not find function "urkpssTest"
+> ur.kpss(tsData, type = c("tau"), lags = c("short"),use.lag = NULL, doplot = TRUE)
+Error in ur.kpss(tsData, type = c("tau"), lags = c("short"), use.lag = NULL,  : 
+  could not find function "ur.kpss"
+> tsstationary<-diff(tsData, differences=1)
+> plot(tsstationary)
+> acf(tsData,lag.max=34)
+> #remove seasonality
+> timeseriesseasonallyadjusted <- tsData- timeseriescomponents$seasonal
+> plot(timeseriesseasonallyadjusted)
+> tsstationary <- diff(timeseriesseasonallyadjusted, differences=1)
+> plot(tsstationary)
+> par(mfrow=c(2,1))
+> acf(tsstationary, lag.max=34) 
+> pacf(tsstationary, lag.max=34)
+> #fit the model
+> fitARIMA<-arima(tsData, order=c(1,1,1),seasonal = list(order = c(1,0,0), period = 12),method="ML")
+> fitARIMA
+
+Call:
+arima(x = tsData, order = c(1, 1, 1), seasonal = list(order = c(1, 0, 0), period = 12), 
+    method = "ML")
+
+Coefficients:
+          ar1      ma1    sar1
+      -0.2321  -0.8343  0.4908
+s.e.   0.1783   0.0885  0.1797
+
+sigma^2 estimated as 4701:  log likelihood = -188.74,  aic = 385.48
+> fitARIMA<-arima(tsData, order=c(0,1,0),seasonal = list(order = c(1,0,0), period = 12),method="ML")
+> fitARIMA
+
+Call:
+arima(x = tsData, order = c(0, 1, 0), seasonal = list(order = c(1, 0, 0), period = 12), 
+    method = "ML")
+
+Coefficients:
+        sar1
+      0.4754
+s.e.  0.1722
+
+sigma^2 estimated as 10787:  log likelihood = -201.58,  aic = 407.17
+> #significance of coefficients
+> coeftest(fitARIMA)
+
+z test of coefficients:
+
+     Estimate Std. Error z value Pr(>|z|)   
+sar1  0.47540    0.17223  2.7602 0.005776 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+> par(mfrow=c(1,1))
+> acf(fitARIMA$residuals)
+> #residual diagnostics
+> boxresult<-LjungBoxTest (fitARIMA$residuals,k=2,StartLag=1) # residual?? or the original series?
+Error in LjungBoxTest(fitARIMA$residuals, k = 2, StartLag = 1) : 
+  could not find function "LjungBoxTest"
+> library(FitAR)
+Error in library(FitAR) : there is no package called ‘FitAR’
+> utils:::menuInstallPkgs()
+--- Please select a CRAN mirror for use in this session ---
+> par(mfrow=c(2,1))
+> plot(boxresult[,3],main="Ljung-Box Q Test", ylab="P-values", xlab="Lag")
+Error in plot(boxresult[, 3], main = "Ljung-Box Q Test", ylab = "P-values",  : 
+  object 'boxresult' not found
+> qqnorm(fitARIMA$residuals)
+> qqline(fitARIMA$residuals)
+> auto.arima(tsData, trace=TRUE)
+
+ ARIMA(2,1,2)            with drift         : Inf
+ ARIMA(0,1,0)            with drift         : 413.0302
+ ARIMA(1,1,0)            with drift         : 402.3796
+ ARIMA(0,1,1)            with drift         : Inf
+ ARIMA(0,1,0)                               : 410.8113
+ ARIMA(2,1,0)            with drift         : 399.367
+ ARIMA(3,1,0)            with drift         : 398.4126
+ ARIMA(4,1,0)            with drift         : 389.7935
+ ARIMA(5,1,0)            with drift         : 392.3519
+ ARIMA(4,1,1)            with drift         : Inf
+ ARIMA(3,1,1)            with drift         : Inf
+ ARIMA(5,1,1)            with drift         : Inf
+ ARIMA(4,1,0)                               : 388.8351
+ ARIMA(3,1,0)                               : 396.2086
+ ARIMA(5,1,0)                               : 391.7022
+ ARIMA(4,1,1)                               : 391.6938
+ ARIMA(3,1,1)                               : 392.7618
+ ARIMA(5,1,1)                               : 394.8968
+
+ Best model: ARIMA(4,1,0)                               
+
+Series: tsData 
+ARIMA(4,1,0) 
+
+Coefficients:
+          ar1      ar2      ar3      ar4
+      -1.0890  -0.9771  -0.7808  -0.5068
+s.e.   0.1446   0.1916   0.1869   0.1405
+
+sigma^2 = 5630:  log likelihood = -188.31
+AIC=386.61   AICc=388.84   BIC=394.1
+> #forcast future values
+> par(mfrow=c(1,1))
+> predict(fitARIMA,n.ahead = 5)
+$pred
+           Jan       Feb       Mar Apr May Jun Jul Aug Sep Oct       Nov       Dec
+2022                                                           110.40903  31.96732
+2023  27.68868  24.83625  27.68868                                                
+
+$se
+          Jan      Feb      Mar Apr May Jun Jul Aug Sep Oct      Nov      Dec
+2022                                                        103.8601 146.8803
+2023 179.8909 207.7201 232.2381                                              
+
+> futurVal <- forecast.Arima(fitARIMA,h=10, level=c(99.5))
+Error in forecast.Arima(fitARIMA, h = 10, level = c(99.5)) : 
+  could not find function "forecast.Arima"
+> futurVal <- forecast.ARIMA(fitARIMA,h=10, level=c(99.5))
+Error in forecast.ARIMA(fitARIMA, h = 10, level = c(99.5)) : 
+  could not find function "forecast.ARIMA"
+> futurVal <- forecast(fitARIMA,h=10, level=c(99.5))
+> plot.forecast(futurVal)
+Error in plot.forecast(futurVal) : 
+  could not find function "plot.forecast"
+> plot(futurVal)
+> > data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+Error: unexpected '>' in ">"
+> > data = ts(data[,2],start = c(2020,1),frequency = 12)
+Error: unexpected '>' in ">"
+> > plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error: unexpected '>' in ">"
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,1],start = c(2020,0),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error in plot.window(xlim, ylim, log, ...) : need finite 'ylim' values
+In addition: Warning messages:
+1: In xy.coords(x, NULL, log = log, setLab = FALSE) :
+  NAs introduced by coercion
+2: In min(x) : no non-missing arguments to min; returning Inf
+3: In max(x) : no non-missing arguments to max; returning -Inf
+> data = ts(data[,1],start = c(2020,1),frequency = 12)
+Error in `[.default`(data, , 1) : incorrect number of dimensions
+> data = ts(data[,3],start = c(2020,1),frequency = 12)
+Error in `[.default`(data, , 3) : incorrect number of dimensions
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,3],start = c(2020,1),frequency = 12)
+Error in `[.data.frame`(data, , 3) : undefined columns selected
+> data = ts(data[,1],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error in plot.window(xlim, ylim, log, ...) : need finite 'ylim' values
+In addition: Warning messages:
+1: In xy.coords(x, NULL, log = log, setLab = FALSE) :
+  NAs introduced by coercion
+2: In min(x) : no non-missing arguments to min; returning Inf
+3: In max(x) : no non-missing arguments to max; returning -Inf
+> data = ts(data[,1],start = c(2020,1),frequency = 6)
+Error in `[.default`(data, , 1) : incorrect number of dimensions
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data,start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data[,2],start = c(2020,1),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(data[,2],start = c(2020),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2020),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data[,2],start = c(2020,2),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data = ts(data[,2],start = c(2020,0),frequency = 12)
+Error in `[.default`(data, , 2) : incorrect number of dimensions
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[,2],start = c(2020,0),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,2],start = c(2020,0),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,],start = c(2020,0),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1)
++ plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error: unexpected symbol in:
+"data = ts(data[0,1],start = c(2020,1)
+plot"
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1)
++ 
++ 
++ ddd
+Error: unexpected symbol in:
+"
+ddd"
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1))
+Error in ts(data[0, 1], start = c(2020, 1)) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1),frequency = 1)
+Error in ts(data[0, 1], start = c(2020, 1), frequency = 1) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1),frequency = 1)
+Error in ts(data[0, 1], start = c(2020, 1), frequency = 1) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1),frequency = 6)
+Error in ts(data[0, 1], start = c(2020, 1), frequency = 6) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1),frequency = 12)
+Error in ts(data[0, 1], start = c(2020, 1), frequency = 12) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[0,1],start = c(2020,1),frequency = 12)
+Error in ts(data[0, 1], start = c(2020, 1), frequency = 12) : 
+  'ts' object must have one or more observations
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,1],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error in plot.window(xlim, ylim, log, ...) : need finite 'ylim' values
+In addition: Warning messages:
+1: In xy.coords(x, NULL, log = log, setLab = FALSE) :
+  NAs introduced by coercion
+2: In min(x) : no non-missing arguments to min; returning Inf
+3: In max(x) : no non-missing arguments to max; returning -Inf
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,1],start = c(2020,1),frequency = 1)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+Error in plot.window(xlim, ylim, log, ...) : need finite 'ylim' values
+In addition: Warning messages:
+1: In xy.coords(x, NULL, log = log, setLab = FALSE) :
+  NAs introduced by coercion
+2: In min(x) : no non-missing arguments to min; returning Inf
+3: In max(x) : no non-missing arguments to max; returning -Inf
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[1,2],start = c(2020,1),frequency = 12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data,start = c(2020,1),frequency = 6)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2,2],start = c(2020,1),frequency = 6)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data,start = c(2020,1),frequency = 1)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(listed_date,start = c(2020,1),frequency = 1)
+Error in is.data.frame(data) : object 'listed_date' not found
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data,start = c(2020,1),frequency = 10)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:35,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:501,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:12,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:20,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:20,2],start=c(2021,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:20,2],start=c(2021,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:20,2],start=c(2021,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data = ts(data[2:50,2],start=c(2020,1),frequency=12)
+Error in `[.default`(data, 2:50, 2) : incorrect number of dimensions
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:50,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:30,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:25,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> data=read.csv('C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv')
+> data = ts(data[2:20,2],start=c(2020,1),frequency=12)
+> plot(data, xlab='Date', ylab = 'Number of days unsold')
+> library(metrics0
++ 
++ 
++ djj
+Error: unexpected symbol in:
+"
+djj"
+> library(Metrics)
+Error in library(Metrics) : there is no package called ‘Metrics’
+> utils:::menuInstallPkgs()
+trying URL 'https://mirror.csclub.uwaterloo.ca/CRAN/bin/windows/contrib/4.1/Metrics_0.1.4.zip'
+Content type 'application/zip' length 83689 bytes (81 KB)
+downloaded 81 KB
+
+package ‘Metrics’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\adi_t\AppData\Local\Temp\RtmpsraCKI\downloaded_packages
+> rmse(data$data,data$futureVal)
+Error in rmse(data$data, data$futureVal) : could not find function "rmse"
+> library(Metrics)
+
+Attaching package: ‘Metrics’
+
+The following object is masked from ‘package:forecast’:
+
+    accuracy
+
+> rmse(data$data,data$futureVal)
+Error in data$data : $ operator is invalid for atomic vectors
+> rmse(data,futureVal)
+Error in se(actual, predicted) : object 'futureVal' not found
+> rmse(data,futurVal)
+Error in `-.default`(actual, predicted) : 
+  non-numeric argument to binary operator
+> rmse(futurVal)
+Error in mse(actual, predicted) : 
+  argument "predicted" is missing, with no default
+> rmse(data[],futurVal)
+Error in `-.default`(actual, predicted) : 
+  non-numeric argument to binary operator
+> rmse(data,futurVal)
+Error in `-.default`(actual, predicted) : 
+  non-numeric argument to binary operator
+> #Load Libraries
+> library("fUnitRoots")
+Error in library("fUnitRoots") : there is no package called ‘fUnitRoots’
+> library(lmtest)
+> library("forecast")
+> library(FitAR)
+Error in library(FitAR) : there is no package called ‘FitAR’
+> #import data
+> save.image("C:\\Users\\adi_t\\OneDrive\\Documents\\R\\ITEC")
+> data_a<-read.csv("C:/Users/adi_t/OneDrive/Documents/R/used-cars-data-2.csv",header=TRUE)
+> #convert to time series
+> tsData<- ts(data[2:35,2],start=c(2011,1),frequency=12)
+Error in `[.default`(data, 2:35, 2) : incorrect number of dimensions
+> tsData<- ts(data_a[2:35,2],start=c(2011,1),frequency=12)
+> plot(tsData)
+> tsData<- ts(data_a[2:35,2],start=c(2020,1),frequency=12)
+> plot(tsData)
+> #decompose into time series components
+> timeseriescomponents <- decompose(tsData)
+> plot(timeseriescomponents)
+> #detemine stationarity of data
+> urkpssTest(tsData, type = c("tau"), lags = c("short"),use.lag = NULL, doplot = TRUE)
+Error in urkpssTest(tsData, type = c("tau"), lags = c("short"), use.lag = NULL,  : 
+  could not find function "urkpssTest"
+> tsstationary<-diff(tsData, differences=1)
+> plot(tsstationary)
+> acf(tsData,lag.max=34)
+> #remove seasonality
+> timeseriesseasonallyadjusted <- tsData- timeseriescomponents$seasonal
+> plot(timeseriesseasonallyadjusted)
+> tsstationary <- diff(timeseriesseasonallyadjusted, differences=1)
+> plot(tsstationary)
+> 
+> par(mfrow=c(2,1))
+> acf(tsstationary, lag.max=34) 
+> pacf(tsstationary, lag.max=34)
+> #fit the model
+> fitARIMA<-arima(tsData, order=c(1,1,1),seasonal = list(order = c(1,0,0), period = 12),method="ML")
+> source("C:\\Users\\adi_t\\OneDrive\\Documents\\R\\ITEC")
+Error in source("C:\\Users\\adi_t\\OneDrive\\Documents\\R\\ITEC") : 
+  C:\Users\adi_t\OneDrive\Documents\R\ITEC:17:1: unexpected '@'
+16: ?ð
+17: @
+    ^
+> source("C:\\Users\\adi_t\\OneDrive\\Documents\\R\\ITEC Final.R")
+Error in file(filename, "r", encoding = encoding) : 
+  cannot open the connection
+In addition: Warning message:
+In file(filename, "r", encoding = encoding) :
+  cannot open file 'C:\Users\adi_t\OneDrive\Documents\R\ITEC Final.R': No such file or directory
+> local({fn<-choose.files(filters=Filters[c('R','txt','All'),],index=4)
++ file.show(fn,header=fn,title='')})
+> 
